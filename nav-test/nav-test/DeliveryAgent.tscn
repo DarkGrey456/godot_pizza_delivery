@@ -35,6 +35,7 @@ mesh = SubResource("BoxMesh_y2354")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=83106441]
 path_desired_distance = 0.2
+target_desired_distance = 0.5
 path_max_distance = 1.01
 simplify_path = true
 simplify_epsilon = 0.745

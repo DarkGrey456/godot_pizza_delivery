@@ -15,8 +15,3 @@ func _ready() -> void:
 			nd.delivery_manager = delivery_manager
 			house_count += 1
 			houses.append(nd)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

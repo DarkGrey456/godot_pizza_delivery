@@ -73,11 +73,13 @@ func complete_order(order_id:int):
 		
 		
 func get_order():
-	var order = orders_queue.get(0)		
+	if orders_queue.size() > 0:
+		var order = orders_queue.get(0)		
 	
-	orders_queue.erase(order)
-	orders_in_progress.append(order)
-	return order
+		orders_queue.erase(order)
+		orders_in_progress.append(order)
+		return order
+	return null
 
 func clear_lists():
 	for e in orders_address:

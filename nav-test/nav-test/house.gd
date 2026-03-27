@@ -13,9 +13,7 @@ func _ready() -> void:
 	delivery_area.connect("body_entered",on_delivery)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+
 
 func on_delivery(body:Node3D):
 	if body is DeliveryAgent:

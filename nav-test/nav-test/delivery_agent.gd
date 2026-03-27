@@ -25,7 +25,7 @@ func set_order_id(order:int):
 	order_id = order
 	
 #=============================================================================================
-func rand_pos_in_zone(min:float, max:float):
+func get_target_pos():
 	if order_collected:
 		if current_order:
 			return current_order.delivery_address
@@ -34,20 +34,18 @@ func rand_pos_in_zone(min:float, max:float):
 			return current_order.collection_address
 	return Vector3.ZERO
 	
+	
 #=============================================================================================
 func compute_lookat_basis(targ:Vector3):
 	var vecTo = targ - global_position
-	var len = vecTo.length()
-	if len < 0.05:
+	var vec_len = vecTo.length()
+	if vec_len < 0.05:
 		return
-	var look_targ = vecTo*2000+global_position
+	var look_targ = vecTo.normalized()*2000+global_position+Vector3.UP * 0.5
+
 	
-	model.look_at(look_targ)
-#=============================================================================================
-func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_accept") :#and is_on_floor():
-		navigation_agent_3d.target_position = rand_pos_in_zone(-90.0, 90.0)
-		activate = true
+	model.look_at( look_targ, Vector3.UP)
+
 #=============================================================================================		
 func _process(delta: float) -> void:
 	curr_delta = delta
@@ -58,7 +56,7 @@ var order_assigned = false
 func _physics_process(delta: float) -> void:
 	if activate:
 		var next_pos = navigation_agent_3d.get_next_path_position()
-		var vecTo = next_pos - global_position
+
 		compute_lookat_basis(next_pos)
 		velocity = -model.global_basis.z*SPEED
 	else:
@@ -71,7 +69,7 @@ func _physics_process(delta: float) -> void:
 					order_assigned = true
 					order_collected = false	
 					label_3d.text = var_to_str(current_order.order_id) + " Collecting"	
-					navigation_agent_3d.target_position = rand_pos_in_zone(-90.0, 90.0)	
+					navigation_agent_3d.target_position = get_target_pos()	
 					activate = true
 		else:
 			if ( current_order and (navigation_agent_3d.target_position.distance_to(current_order.delivery_address)<1.0)
@@ -82,12 +80,12 @@ func _physics_process(delta: float) -> void:
 					order_assigned = true
 					order_collected = false	
 					label_3d.text = var_to_str(current_order.order_id) + " Collecting"		
-					navigation_agent_3d.target_position = rand_pos_in_zone(-90.0, 90.0)	
+					navigation_agent_3d.target_position = get_target_pos()	
 					activate = true
 			else:
 				order_collected = true
 				label_3d.text = var_to_str(current_order.order_id)	+ " Delivering"	
-				navigation_agent_3d.target_position = rand_pos_in_zone(-90.0, 90.0)	
+				navigation_agent_3d.target_position = get_target_pos()	
 				activate = true
 	
 	if not is_on_floor():

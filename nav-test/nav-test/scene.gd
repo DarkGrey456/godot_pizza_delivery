@@ -19,9 +19,3 @@ func _ready() -> void:
 		(obj as DeliveryAgent).delivery_manager = delivery_manager
 		obj.global_position.x = randf_range(-50.0, 50.0)
 		obj.global_position.z = randf_range(-50.0, 50.0)
-
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

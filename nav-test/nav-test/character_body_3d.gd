@@ -7,17 +7,17 @@ const JUMP_VELOCITY = 4.5
 var curr_delta :float= 0.0
 var activate = false
 #=============================================================================================
-func rand_pos_in_zone(min:float, max:float):
-	return Vector3( randf_range(min,max), 0.0, randf_range(min,max))
+func rand_pos_in_zone(pos_min:float, pos_max:float):
+	return Vector3( randf_range(pos_min,pos_max), 0.0, randf_range(pos_min,pos_max))
 #=============================================================================================
 func compute_lookat_basis(targ:Vector3):
 	var vecTo = targ - global_position
-	var len = vecTo.length()
-	if len < 0.05:
+	var vec_len = vecTo.length()
+	if vec_len < 0.05:
 		return
-	var look_targ = vecTo*2000+global_position
-	
-	model.look_at(look_targ)
+	var look_targ = vecTo.normalized()*2000+global_position+Vector3.UP * 0.5
+
+	model.look_at( look_targ, Vector3(0.0,1.0,0.0))
 #=============================================================================================
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_accept") :#and is_on_floor():
@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if activate:
 		var next_pos = navigation_agent_3d.get_next_path_position()
-		var vecTo = next_pos - global_position
+
 		compute_lookat_basis(next_pos)
 		velocity = -model.global_basis.z*SPEED
 	else:

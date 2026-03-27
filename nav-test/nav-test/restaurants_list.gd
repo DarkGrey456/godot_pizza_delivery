@@ -16,7 +16,3 @@ func get_restaurant(id:int):
 		if e.id == id:
 			return e
 	return null
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
