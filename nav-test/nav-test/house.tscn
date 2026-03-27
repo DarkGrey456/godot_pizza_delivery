@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://d1h7fyhunsd24"]
+
+[ext_resource type="Script" uid="uid://dn7gi8i5icch7" path="res://house.gd" id="1_hfkix"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_g5ubp"]
+size = Vector3(5, 6, 4)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_hfkix"]
+data = PackedVector3Array(-2.5, 3, 2, 2.5, 3, 2, -2.5, -3, 2, 2.5, 3, 2, 2.5, -3, 2, -2.5, -3, 2, 2.5, 3, -2, -2.5, 3, -2, 2.5, -3, -2, -2.5, 3, -2, -2.5, -3, -2, 2.5, -3, -2, 2.5, 3, 2, 2.5, 3, -2, 2.5, -3, 2, 2.5, 3, -2, 2.5, -3, -2, 2.5, -3, 2, -2.5, 3, -2, -2.5, 3, 2, -2.5, -3, -2, -2.5, 3, 2, -2.5, -3, 2, -2.5, -3, -2, 2.5, 3, 2, -2.5, 3, 2, 2.5, 3, -2, -2.5, 3, 2, -2.5, 3, -2, 2.5, 3, -2, -2.5, -3, 2, 2.5, -3, 2, -2.5, -3, -2, 2.5, -3, 2, 2.5, -3, -2, -2.5, -3, -2)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hfkix"]
+radius = 3.0
+
+[node name="House" type="MeshInstance3D" unique_id=2077371833 groups=["DeliveryAddress"]]
+mesh = SubResource("BoxMesh_g5ubp")
+script = ExtResource("1_hfkix")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=857340243]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=2057418915]
+shape = SubResource("ConcavePolygonShape3D_hfkix")
+
+[node name="Address" type="Marker3D" parent="." unique_id=238200188]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -3, 0)
+
+[node name="Area3D" type="Area3D" parent="Address" unique_id=1098436543]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Address/Area3D" unique_id=83357764]
+shape = SubResource("SphereShape3D_hfkix")

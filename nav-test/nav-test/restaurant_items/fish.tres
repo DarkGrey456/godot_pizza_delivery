@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FoodItem" format=3 uid="uid://bc6jo322h1vey"]
+
+[ext_resource type="Script" uid="uid://ddrq55q2l67bj" path="res://food_item.gd" id="1_thnn8"]
+
+[resource]
+script = ExtResource("1_thnn8")
+name = "fish"
+price = 7.0
+metadata/_custom_type_script = "uid://ddrq55q2l67bj"

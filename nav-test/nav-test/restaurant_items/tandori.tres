@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FoodItem" format=3 uid="uid://b8wose1il2p4w"]
+
+[ext_resource type="Script" uid="uid://ddrq55q2l67bj" path="res://food_item.gd" id="1_jsiml"]
+
+[resource]
+script = ExtResource("1_jsiml")
+name = "Tandori Chicken"
+price = 10.0
+metadata/_custom_type_script = "uid://ddrq55q2l67bj"

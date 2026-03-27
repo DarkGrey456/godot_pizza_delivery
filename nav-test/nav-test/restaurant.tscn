@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://co0vl8y18mslg"]
+
+[ext_resource type="Script" uid="uid://dnfsgw6n88bvm" path="res://restaurant.gd" id="1_mtvav"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7to46"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mtvav"]
+material = SubResource("StandardMaterial3D_7to46")
+size = Vector3(10, 6, 6)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_1pkq2"]
+data = PackedVector3Array(-5, 3, 3, 5, 3, 3, -5, -3, 3, 5, 3, 3, 5, -3, 3, -5, -3, 3, 5, 3, -3, -5, 3, -3, 5, -3, -3, -5, 3, -3, -5, -3, -3, 5, -3, -3, 5, 3, 3, 5, 3, -3, 5, -3, 3, 5, 3, -3, 5, -3, -3, 5, -3, 3, -5, 3, -3, -5, 3, 3, -5, -3, -3, -5, 3, 3, -5, -3, 3, -5, -3, -3, 5, 3, 3, -5, 3, 3, 5, 3, -3, -5, 3, 3, -5, 3, -3, 5, 3, -3, -5, -3, 3, 5, -3, 3, -5, -3, -3, 5, -3, 3, 5, -3, -3, -5, -3, -3)
+
+[node name="Restaurant" type="MeshInstance3D" unique_id=13758960 groups=["Restaurant"]]
+mesh = SubResource("BoxMesh_mtvav")
+script = ExtResource("1_mtvav")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1351258174]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1279444576 groups=["Restaurant"]]
+shape = SubResource("ConcavePolygonShape3D_1pkq2")
+
+[node name="Address" type="Marker3D" parent="." unique_id=483906062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 6.397)

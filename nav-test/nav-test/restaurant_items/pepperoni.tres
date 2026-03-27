@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FoodItem" format=3 uid="uid://b14h54kbbwvs7"]
+
+[ext_resource type="Script" uid="uid://ddrq55q2l67bj" path="res://food_item.gd" id="1_0xnsa"]
+
+[resource]
+script = ExtResource("1_0xnsa")
+name = "Pepperoni Pizza"
+price = 10.0
+metadata/_custom_type_script = "uid://ddrq55q2l67bj"

@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://cy8ymn4lwyl3j"]
+
+[ext_resource type="Script" uid="uid://x0e0tv0to5j" path="res://character_body_3d.gd" id="1_twre2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nxogm"]
+height = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3253y"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_u3cyc"]
+material = SubResource("StandardMaterial3D_3253y")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m7jmp"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y2354"]
+material = SubResource("StandardMaterial3D_m7jmp")
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="CharacterBody3D2" type="CharacterBody3D" unique_id=1126158873]
+script = ExtResource("1_twre2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1985532207]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_nxogm")
+
+[node name="model" type="MeshInstance3D" parent="." unique_id=1667924774]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_u3cyc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="model" unique_id=961536659]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+mesh = SubResource("BoxMesh_y2354")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=83106441]
+path_desired_distance = 0.2
+path_max_distance = 1.01
+simplify_path = true
+simplify_epsilon = 0.745
+avoidance_enabled = true
+radius = 1.0
+neighbor_distance = 10.0
+max_neighbors = 30
+time_horizon_agents = 2.0
+max_speed = 5.0
+
+[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
+[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
