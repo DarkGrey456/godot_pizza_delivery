@@ -41,10 +41,10 @@ func compute_lookat_basis(targ:Vector3):
 	var vec_len = vecTo.length()
 	if vec_len < 0.05:
 		return
-	var look_targ = vecTo.normalized()*2000+global_position+Vector3.UP * 0.5
+	var look_targ = vecTo.normalized()*2000+position+Vector3.UP * 0.5
 
-	
-	model.look_at( look_targ, Vector3.UP)
+	model.global_basis = model.global_basis.looking_at( look_targ, Vector3(0.0,1.0,0.0))
+	#model.look_at( look_targ, Vector3.UP)
 
 #=============================================================================================		
 func _process(delta: float) -> void:
