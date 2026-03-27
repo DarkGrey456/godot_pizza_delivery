@@ -11,6 +11,7 @@ func _ready() -> void:
 		var obj = packed_scene.instantiate()
 		add_child(obj)
 		obj.global_position.x = randf_range(-250.0, 250.0)
+		obj.global_position.y = 1.0
 		obj.global_position.z = randf_range(-250.0, 250.0)
 		
 	for i in range(0,20):
@@ -18,4 +19,5 @@ func _ready() -> void:
 		add_child(obj)
 		(obj as DeliveryAgent).delivery_manager = delivery_manager
 		obj.global_position.x = randf_range(-50.0, 50.0)
+		obj.global_position.y = 1.0
 		obj.global_position.z = randf_range(-50.0, 50.0)

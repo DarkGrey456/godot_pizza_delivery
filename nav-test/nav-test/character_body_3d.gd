@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 		compute_lookat_basis(next_pos)
 		velocity = -model.global_basis.z*SPEED
 	else:
-		navigation_agent_3d.target_position = rand_pos_in_zone(-90.0, 90.0)
+		navigation_agent_3d.target_position = rand_pos_in_zone(-250.0, 250.0)
 		velocity = Vector3.ZERO
 		activate = true
 	
@@ -50,6 +50,6 @@ func _on_navigation_agent_3d_target_reached() -> void:
 	activate = false
 #=============================================================================================	
 func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
-	velocity = safe_velocity#velocity.move_toward(safe_velocity,curr_delta*60.0)
-	navigation_agent_3d.velocity = safe_velocity
+	velocity = safe_velocity#velocity.move_toward(safe_velocity,curr_delta*120.0)
+	navigation_agent_3d.velocity = velocity
 	move_and_slide()

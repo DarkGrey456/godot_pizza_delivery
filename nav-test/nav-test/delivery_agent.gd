@@ -99,5 +99,5 @@ func _on_navigation_agent_3d_target_reached() -> void:
 #=============================================================================================	
 func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 	velocity = safe_velocity#velocity.move_toward(safe_velocity,curr_delta*60.0)
-	navigation_agent_3d.velocity = safe_velocity
+	navigation_agent_3d.velocity = velocity
 	move_and_slide()

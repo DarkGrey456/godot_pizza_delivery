@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://84h60jxbvevj" path="res://delivery_agent.gd" id="1_6giss"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nxogm"]
-height = 1.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3253y"]
 albedo_color = Color(1, 0, 0, 1)
