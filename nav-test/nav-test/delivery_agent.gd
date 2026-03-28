@@ -21,6 +21,7 @@ func complete_order():
 	order_assigned = false
 	current_order = null
 	order_delivered_signal_flag = true
+	label_3d.text = "... waiting"
 	
 func has_order(order:int):
 	if current_order:
@@ -70,8 +71,10 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector3.ZERO
 		if order_assigned == false:
 			if dispatcher:
-				current_order = dispatcher.get_order()	
-				if current_order:
+				var new_order = dispatcher.get_order()
+				
+				if new_order:
+					current_order = new_order	
 					order_assigned = true
 					order_collected = false	
 					label_3d.text = var_to_str(current_order.order_id) + " Collecting"	
@@ -82,7 +85,7 @@ func _physics_process(delta: float) -> void:
 				or (global_position.distance_to(current_order.delivery_address)<1.0)):
 				if order_delivered_signal_flag:
 					order_delivered_signal_flag = false
-					order_collected = false
+					
 					var new_order = dispatcher.get_order()
 					
 					if new_order:
@@ -92,6 +95,9 @@ func _physics_process(delta: float) -> void:
 						label_3d.text = var_to_str(new_order.order_id) + " Collecting"		
 						navigation_agent_3d.target_position = get_target_pos()	
 						activate = true
+					else:
+						order_delivered_signal_flag = true
+						label_3d.text = "... waiting"
 			else:
 				order_collected = true
 				label_3d.text = var_to_str(current_order.order_id)	+ " Delivering"	

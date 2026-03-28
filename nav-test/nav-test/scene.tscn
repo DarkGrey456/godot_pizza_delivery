@@ -737,4 +737,68 @@ spring_length = 10.0
 
 [node name="Camera3D" type="Camera3D" parent="DeliveryAgent/model/Node3D/SpringArm3D" unique_id=827251353]
 
+[node name="Control" type="Control" parent="." unique_id=395632618]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=203785711]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=255578883]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="Control/VBoxContainer/HBoxContainer" unique_id=1819079786]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/VBoxContainer/HBoxContainer/Panel" unique_id=1859285120]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer/Panel/VBoxContainer" unique_id=134587552]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Label2" type="Label" parent="Control/VBoxContainer/HBoxContainer/Panel/VBoxContainer" unique_id=900312971]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Label3" type="Label" parent="Control/VBoxContainer/HBoxContainer/Panel/VBoxContainer" unique_id=280357736]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Control4" type="Control" parent="Control/VBoxContainer/HBoxContainer" unique_id=567819247]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.8
+
+[node name="Control" type="Control" parent="Control/VBoxContainer" unique_id=1684999274]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control2" type="Control" parent="Control/VBoxContainer" unique_id=510820581]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control3" type="Control" parent="Control/VBoxContainer" unique_id=497322716]
+layout_mode = 2
+size_flags_vertical = 3
+
 [editable path="DeliveryAgent"]
