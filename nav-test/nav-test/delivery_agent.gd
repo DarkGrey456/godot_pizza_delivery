@@ -5,22 +5,28 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
 @onready var model: MeshInstance3D = $model
-@export var delivery_manager: DeliveryManager
+@export var dispatcher: Dispatcher
 var curr_delta :float= 0.0
 var activate = false
 var order_id:int = -2
-var current_order:CustomerOrder = null
+var current_order:CustomerOrder 
 var order_collected = false
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 
 @onready var label_3d: Label3D = %Label3D
 
+var order_delivered_signal_flag:bool = false
 
 func complete_order():
 	order_assigned = false
 	current_order = null
+	order_delivered_signal_flag = true
+	
 func has_order(order:int):
-	return order == order_id
+	if current_order:
+		return current_order.order_id == order
+	return false
+	
 func set_order_id(order:int):
 	order_id = order
 	
@@ -43,7 +49,7 @@ func compute_lookat_basis(targ:Vector3):
 		return
 	var look_targ = vecTo.normalized()*2000+position+Vector3.UP * 0.5
 
-	model.global_basis = model.global_basis.looking_at( look_targ, Vector3(0.0,1.0,0.0))
+	model.global_basis = Basis.looking_at( look_targ, Vector3(0.0,1.0,0.0))
 	#model.look_at( look_targ, Vector3.UP)
 
 #=============================================================================================		
@@ -63,8 +69,8 @@ func _physics_process(delta: float) -> void:
 		
 		velocity = Vector3.ZERO
 		if order_assigned == false:
-			if delivery_manager:
-				current_order = delivery_manager.get_order()	
+			if dispatcher:
+				current_order = dispatcher.get_order()	
 				if current_order:
 					order_assigned = true
 					order_collected = false	
@@ -74,14 +80,18 @@ func _physics_process(delta: float) -> void:
 		else:
 			if ( current_order and (navigation_agent_3d.target_position.distance_to(current_order.delivery_address)<1.0)
 				or (global_position.distance_to(current_order.delivery_address)<1.0)):
-				order_collected = false
-				current_order = delivery_manager.get_order()
-				if current_order:
-					order_assigned = true
-					order_collected = false	
-					label_3d.text = var_to_str(current_order.order_id) + " Collecting"		
-					navigation_agent_3d.target_position = get_target_pos()	
-					activate = true
+				if order_delivered_signal_flag:
+					order_delivered_signal_flag = false
+					order_collected = false
+					var new_order = dispatcher.get_order()
+					
+					if new_order:
+						current_order = new_order
+						order_assigned = true
+						order_collected = false	
+						label_3d.text = var_to_str(new_order.order_id) + " Collecting"		
+						navigation_agent_3d.target_position = get_target_pos()	
+						activate = true
 			else:
 				order_collected = true
 				label_3d.text = var_to_str(current_order.order_id)	+ " Delivering"	

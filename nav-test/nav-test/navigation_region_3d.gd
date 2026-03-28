@@ -1,4 +1,4 @@
-class_name DeliveryManager
+class_name Dispatcher
 extends NavigationRegion3D
 
 
@@ -41,20 +41,26 @@ func _process(delta: float) -> void:
 		random_order()
 
 func random_order():
-	var rn = randi_range(0,houses_to_order.size()-1)
+
+	var house :House= houses_to_order.pick_random()
+	house.order_id = order_count
+	
 	var new_order:CustomerOrder = CustomerOrder.new()
 	new_order.order_id = order_count
-	new_order.house_id= houses_to_order.get(rn).id
-	new_order.delivery_address = houses_to_order.get(rn).get_address()
+	new_order.house_id = house.id
+	new_order.delivery_address = house.get_address()
+	
+	# needs refactoring below
 	new_order.rest_id = randi_range(0, restaurants_list.restaurants.size()-1)
-	new_order.collection_address =restaurants_list.get_restaurant(new_order.rest_id).get_address()
-	# add the order id to the restaurant
-	restaurants_list.get_restaurant(new_order.rest_id).orders.append(new_order.order_id)
+	var restaurant = restaurants_list.get_restaurant(new_order.rest_id)
+	new_order.collection_address =restaurant.get_address()
+
+	restaurant.orders.append(new_order.order_id)
 	
 	orders_queue.append(new_order)
-	var obj =houses_to_order.get(rn)
-	orders_address.append(obj)
-	houses_to_order.erase(obj)
+
+	orders_address.append(house)
+	houses_to_order.erase(house)
 	order_count += 1
 	
 func complete_order(order_id:int):

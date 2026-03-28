@@ -17,9 +17,9 @@ func compute_lookat_basis(targ:Vector3):
 		return
 	var look_targ = vecTo.normalized()*2000+global_position+Vector3.UP * 0.5
 	
-	model.global_basis = model.global_basis.looking_at( look_targ, Vector3(0.0,1.0,0.0))
+	model.global_basis = Basis.looking_at( look_targ, Vector3(0.0,1.0,0.0))
 #=============================================================================================
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_accept") :#and is_on_floor():
 		navigation_agent_3d.target_position = rand_pos_in_zone(-250.0, 250.0)
 		activate = true

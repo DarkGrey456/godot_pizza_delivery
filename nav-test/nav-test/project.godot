@@ -15,10 +15,6 @@ run/main_scene="uid://3b21dmpofu5q"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [display]
 
 window/vsync/vsync_mode=0

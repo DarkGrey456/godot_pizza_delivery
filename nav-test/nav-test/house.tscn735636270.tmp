@@ -24,7 +24,6 @@ shape = SubResource("ConcavePolygonShape3D_hfkix")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -3, 0)
 
 [node name="Area3D" type="Area3D" parent="Address" unique_id=1098436543]
-collision_mask = 524289
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Address/Area3D" unique_id=83357764]
 shape = SubResource("SphereShape3D_hfkix")
