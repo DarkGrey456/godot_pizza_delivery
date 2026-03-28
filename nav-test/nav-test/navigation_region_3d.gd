@@ -45,11 +45,13 @@ func _process(delta: float) -> void:
 	
 	if order_timer > 1.5:
 		order_timer = 0.0
-		random_order()
+		if ready_customers.size() > 0:
+			random_order()
 
 #========================================================================	
 func random_order():
 	var random_num = randi_range(0, ready_customers.size()-1) 
+	
 	var house :House=  ready_customers.get(random_num)
 	
 	house.order_id = order_count
